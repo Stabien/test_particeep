@@ -1,0 +1,5 @@
+react-app-env.d.ts
+reportWebVitals.ts
+tailwind.config.cjs
+postcss.config.cjs
+vite.config.ts
