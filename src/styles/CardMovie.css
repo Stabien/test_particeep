@@ -1,0 +1,88 @@
+.itemMovie {
+  display: flex;
+  flex-direction: column;
+  background: #124B89;
+  margin: 10px;
+  width: 350px;
+  padding: 20px 25px;
+  border-radius: 5px;
+}
+
+.itemMovie h1 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 20px;
+  color: white;
+}
+
+.itemMovie h2 {
+  margin-top: 0px;
+  color: #5F5F5F;
+  font-weight: 400;
+  font-size: 16px;
+  color: #BFBFBF
+}
+
+.bottom-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rating {
+  width: 30%;
+}
+
+.rating-bar {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.rating-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rating-buttons button {
+  border: none;
+  box-shadow: none;
+  background: none;
+  padding: 0;
+}
+
+.rating-buttons img {
+  width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+.rating-bar span {
+  margin: 0px;
+  height: 5px;
+}
+
+.like-rating {
+  background: yellow;
+}
+
+.dislike-rating {
+  background: #BFBFBF;
+}
+
+.delete {
+  width: fit-content;
+  background: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  box-shadow: none;
+  font-family: 'Nunito';
+}
