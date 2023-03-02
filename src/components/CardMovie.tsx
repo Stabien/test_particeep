@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useDispatch, useSelector, connect } from 'react-redux'
-import '@/styles/CardMovie.css'
+import { useDispatch } from 'react-redux'
 import likeButton from '@/assets/like_button.png'
 import dislikeButton from '@/assets/dislike_button.png'
 import { Movie } from '@/types'
@@ -70,25 +69,28 @@ const CardMovie = (props: Props): JSX.Element => {
   }, [props.data.likes, props.data.dislikes])
 
   return (
-    <div className="itemMovie">
-      <h1>{props.data.title}</h1>
+    <div className="w-96 p-6 mr-4 my-2 ml-0 bg-blue-500 rounded text-white">
+      <h1 className="font-bold">{props.data.title}</h1>
       <h2>{props.data.category}</h2>
-      <div className="bottom-container">
-        <button onClick={() => dispatch(deleteMovie(props.data.id))} className="delete">
+      <div className="bottom-container mt-8 flex flex-row justify-between">
+        <button
+          onClick={() => dispatch(deleteMovie(props.data.id))}
+          className="bg-red-500 p-1.5 rounded text-sm"
+        >
           Supprimer
         </button>
-        <div className="rating">
-          <div className="rating-buttons">
-            <button onClick={() => handleLike()}>
+        <div className="w-24 rating">
+          <div className="w-full flex flex-row justify-between">
+            <button className="w-5 h-5" onClick={() => handleLike()}>
               <img src={likeButton} alt="like" />
             </button>
-            <button onClick={() => handleDislike()}>
+            <button className="w-5 h-5" onClick={() => handleDislike()}>
               <img src={dislikeButton} alt="dislike" />
             </button>
           </div>
-          <div className="rating-bar">
-            <span className="like-rating" style={{ width: `${likeRatio}%` }}></span>
-            <span className="dislike-rating" style={{ width: `${dislikeRatio}%` }}></span>
+          <div className="w-full flex flex-row justify-between rating-bar pt-2">
+            <span className="bg-yellow-300 h-1" style={{ width: `${likeRatio}%` }}></span>
+            <span className="bg-black h-1" style={{ width: `${dislikeRatio}%` }}></span>
           </div>
         </div>
       </div>

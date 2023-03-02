@@ -1,40 +1,33 @@
 import { MultiselectOption } from '@/types'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import Select from 'react-select'
 
 interface Props {
   options: MultiselectOption[]
 }
 
-const Multiselect = (props: Props): JSX.Element => {
+const Multiselect = (
+  props: Props,
+  updateValue: (value: MultiselectOption[]) => void,
+): JSX.Element => {
   const { options } = props
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
+  const [selectedOptions, setSelectedOptions] = useState<MultiselectOption[]>([])
 
-  const updateOption = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const currentOption = (e.target as HTMLSelectElement).value
-
-    if (selectedOptions.includes(currentOption)) {
-      setSelectedOptions(selectedOptions.filter((option) => currentOption !== option))
-    } else {
-      setSelectedOptions([...selectedOptions, currentOption])
-    }
+  const onChange = (value: MultiselectOption[]): void => {
+    setSelectedOptions(value)
+    updateValue(value)
   }
-
-  const renderOptions = options.map((option, index): JSX.Element => {
-    return (
-      <option key={index} value={option.value}>
-        {option.label}
-      </option>
-    )
-  })
-
-  const renderSelectedOptions = selectedOptions.map((option, index) => {
-    return <span key={index}>{option}</span>
-  })
 
   return (
     <div className="multiselect-container">
-      <div className="tag-container">{renderSelectedOptions}</div>
-      <select onChange={(e) => updateOption(e)}>{renderOptions}</select>
+      <Select
+        value={selectedOptions}
+        options={options}
+        onChange={onChange}
+        closeMenuOnSelect={false}
+        isMulti
+        placeholder="Filtrer par catégorie"
+      />
     </div>
   )
 }
