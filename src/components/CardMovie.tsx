@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
-import '../styles/CardMovie.css'
-import likeButton from '../assets/like_button.png'
-import dislikeButton from '../assets/dislike_button.png'
-import { Movie, State } from '@/types'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector, connect } from 'react-redux'
+import '@/styles/CardMovie.css'
+import likeButton from '@/assets/like_button.png'
+import dislikeButton from '@/assets/dislike_button.png'
+import { Movie } from '@/types'
 import { likeMovieAction, dislikeMovieAction, deleteMovieAction } from '@/store/movieSlice'
 import { AnyAction } from '@reduxjs/toolkit'
 
@@ -51,8 +51,6 @@ const CardMovie = (props: Props): JSX.Element => {
       dispatch(likeMovie(-1))
       setIsLiked(false)
     }
-    setLikeRatio((props.data.likes / (props.data.likes + props.data.dislikes)) * 100)
-    setDislikeRatio((props.data.dislikes / (props.data.likes + props.data.dislikes)) * 100)
   }
 
   const handleDislike = (): void => {
@@ -64,9 +62,12 @@ const CardMovie = (props: Props): JSX.Element => {
       dispatch(dislikeMovie(-1))
       setIsDisliked(false)
     }
+  }
+
+  useEffect(() => {
     setLikeRatio((props.data.likes / (props.data.likes + props.data.dislikes)) * 100)
     setDislikeRatio((props.data.dislikes / (props.data.likes + props.data.dislikes)) * 100)
-  }
+  }, [props.data.likes, props.data.dislikes])
 
   return (
     <div className="itemMovie">
@@ -86,8 +87,8 @@ const CardMovie = (props: Props): JSX.Element => {
             </button>
           </div>
           <div className="rating-bar">
-            <span className="like-rating" style={{ width: `${likeRatio} %` }}></span>
-            <span className="dislike-rating" style={{ width: `${dislikeRatio} %` }}></span>
+            <span className="like-rating" style={{ width: `${likeRatio}%` }}></span>
+            <span className="dislike-rating" style={{ width: `${dislikeRatio}%` }}></span>
           </div>
         </div>
       </div>
@@ -95,8 +96,4 @@ const CardMovie = (props: Props): JSX.Element => {
   )
 }
 
-export default connect((state: State) => {
-  return {
-    movies: state.movies,
-  }
-})(CardMovie)
+export default CardMovie

@@ -8,6 +8,7 @@ export interface Movie {
 
 export interface State {
   movies: Movie[]
+  isLoaded: boolean
 }
 
 export interface MovieLikeData {
@@ -17,4 +18,9 @@ export interface MovieLikeData {
   removePreviousLike?: boolean
   removePreviousDislike?: boolean
   value: number
+}
+
+export interface MultiselectOption {
+  label: string
+  value: string
 }

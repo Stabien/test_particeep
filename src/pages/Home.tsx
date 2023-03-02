@@ -1,44 +1,50 @@
-import { useState, useEffect, SetStateAction } from 'react'
-import { useDispatch, useSelector, connect } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { movies$ } from '@/data/movies.js'
 import '@/styles/App.css'
 import CardMovie from '@/components/CardMovie'
 import { State, Movie } from '@/types'
+import { fillMoviesAction } from '@/store/movieSlice'
+import Multiselect from '@/components/Multiselect'
 
 const Home = (): JSX.Element => {
-  const [movies, setMovies] = useState<Movie[]>([])
   const dispatch = useDispatch()
-  const storeMovies = useSelector((state: State) => state.movies)
+  const movies = useSelector((state: State) => state.movies)
+  const isLoaded = useSelector((state: State) => state.isLoaded)
 
-  const fillMovies = () => {
-    return {
-      type: 'FILL_MOVIES',
-      movies: movies,
+  const renderMovieList = movies.map((item) => <CardMovie key={item.id} data={item} />)
+
+  const movieCategories: string[] = []
+
+  for (const movie of movies) {
+    if (!movieCategories.includes(movie.category)) {
+      movieCategories.push(movie.category)
     }
   }
 
-  const renderItem = storeMovies.map((item) => {
-    return <CardMovie key={item.id} data={item} />
-  })
+  const multiselectOptions = movieCategories.map((category) => ({
+    label: category,
+    value: category,
+  }))
 
   useEffect(() => {
-    if (storeMovies.length === 0) {
+    if (!isLoaded) {
       movies$
-        .then((response) => setMovies(response as SetStateAction<Movie[]>))
-        .catch((e) => console.log('test'))
-      dispatch(fillMovies())
+        .then((response) => dispatch(fillMoviesAction(response as Movie[])))
+        .catch((e) => {
+          throw new Error(e)
+        })
     }
   })
 
   return (
     <div className="App">
-      <div className="container">{renderItem}</div>
+      <div className="filter">
+        <Multiselect options={multiselectOptions} />
+      </div>
+      <div className="container">{renderMovieList}</div>
     </div>
   )
 }
 
-export default connect((state: State) => {
-  return {
-    movies: state.movies,
-  }
-})(Home)
+export default Home
