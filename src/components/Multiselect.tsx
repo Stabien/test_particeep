@@ -4,13 +4,11 @@ import Select from 'react-select'
 
 interface Props {
   options: MultiselectOption[]
+  onChange: (value: MultiselectOption[]) => void
 }
 
-const Multiselect = (
-  props: Props,
-  updateValue: (value: MultiselectOption[]) => void,
-): JSX.Element => {
-  const { options } = props
+const Multiselect = (props: Props): JSX.Element => {
+  const { options, onChange: updateValue } = props
   const [selectedOptions, setSelectedOptions] = useState<MultiselectOption[]>([])
 
   const onChange = (value: MultiselectOption[]): void => {

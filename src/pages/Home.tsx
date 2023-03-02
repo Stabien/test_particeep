@@ -14,10 +14,12 @@ const Home = (): JSX.Element => {
   const [selectedOptions, setSelectedOptions] = useState<MultiselectOption[]>([])
 
   const renderMovieList = movies.map((movie) => {
-    if (selectedOptions.includes(movie.category as unknown as MultiselectOption)) {
+    const selectedCategories = selectedOptions.map((option) => option.value)
+    if (selectedCategories.includes(movie.category) || selectedOptions.length === 0) {
       return <CardMovie key={movie.id} data={movie} />
+    } else {
+      return <Fragment key={movie.id}></Fragment>
     }
-    return <Fragment key={movie.id}></Fragment>
   })
 
   const movieCategories: string[] = []
