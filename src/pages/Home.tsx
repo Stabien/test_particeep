@@ -5,7 +5,7 @@ import CardMovie from '@/components/CardMovie'
 import { State, Movie, SelectOption } from '@/types'
 import { fillMoviesAction } from '@/store/movieSlice'
 import Multiselect from '@/components/Multiselect'
-import Select from 'react-select'
+import Select, { SingleValue, ActionMeta } from 'react-select'
 
 const itemPerPageOptions = [
   { value: 4, label: '4' },
@@ -88,7 +88,10 @@ const Home = (): JSX.Element => {
     </button>
   )
 
-  const updateItemPerPage = (option: SelectOption): void => {
+  const updateItemPerPage = (
+    newValue: SingleValue<{ value: number; label: string }>,
+    actionMeta: ActionMeta<{ value: number; label: string }>,
+  ): void => {
     setPageNumber(0)
     setItemPerPage(option.value)
   }
