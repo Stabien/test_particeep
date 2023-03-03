@@ -22,19 +22,23 @@ const movieSlice = createSlice({
             movie.dislikes -= 1
           }
           movie.likes += action.payload.value
+          movie.isDisliked = false
+          movie.isLiked = true
         }
         return movie
       })
     },
     dislikeMovieAction: (state: State, action: PayloadAction<MovieLikeData>): void => {
-      state.movies.map((item) => {
-        if (item.id === action.payload.id) {
+      state.movies.map((movie) => {
+        if (movie.id === action.payload.id) {
           if (action.payload.removePreviousLike as boolean) {
-            item.likes -= 1
+            movie.likes -= 1
           }
-          item.dislikes += action.payload.value
+          movie.dislikes += action.payload.value
+          movie.isLiked = false
+          movie.isDisliked = true
         }
-        return item
+        return movie
       })
     },
   },

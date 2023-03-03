@@ -17,8 +17,8 @@ const CardMovie = (props: Props): JSX.Element => {
   const [dislikeRatio, setDislikeRatio] = useState(
     (props.data.dislikes / (props.data.likes + props.data.dislikes)) * 100,
   )
-  const [isLiked, setIsLiked] = useState(false)
-  const [isDisliked, setIsDisliked] = useState(false)
+  const [isLiked, setIsLiked] = useState(props.data.isLiked)
+  const [isDisliked, setIsDisliked] = useState(props.data.isDisliked)
   const dispatch = useDispatch()
 
   const deleteMovie = (id: string): AnyAction => {

@@ -4,6 +4,8 @@ export interface Movie {
   category: string
   likes: number
   dislikes: number
+  isLiked: boolean
+  isDisliked: boolean
 }
 
 export interface State {
