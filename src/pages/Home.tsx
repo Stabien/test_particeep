@@ -72,7 +72,7 @@ const Home = (): JSX.Element => {
 
   const previousButton = (
     <button
-      className="mr-auto sm:mr-2 bg-red-400 px-2 w-24 h-10 text-white rounded"
+      className="mr-auto sm:mr-2 bg-yellow-400 px-2 w-24 h-10 text-black rounded"
       onClick={() => setPageNumber(pageNumber - 1)}
     >
       Précédent
@@ -81,7 +81,7 @@ const Home = (): JSX.Element => {
 
   const nextButton = (
     <button
-      className="ml-auto sm:ml-2 bg-red-400 px-2 w-24 h-10 text-white rounded"
+      className="ml-auto sm:ml-2 bg-yellow-400 px-2 w-24 h-10 text-black rounded"
       onClick={() => setPageNumber(pageNumber + 1)}
     >
       Suivant
