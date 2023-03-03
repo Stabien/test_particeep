@@ -112,7 +112,7 @@ const Home = (): JSX.Element => {
       <div className="flex flex-wrap flex-row">{movies.length > 0 ? renderMovieList() : null}</div>
       <div className="w-full flex flex-col sm:flex-row justify-between">
         <div className="mt-2">
-          <label htmlFor="select-item-per-page text-xs">Nombre d'éléments affichés</label>
+          <label htmlFor="select-item-per-page text-xs">Nombre d&apos;éléments affichés</label>
           <Select
             options={itemPerPageOptions}
             onChange={updateItemPerPage}
