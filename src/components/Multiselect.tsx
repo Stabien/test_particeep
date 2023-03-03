@@ -1,6 +1,6 @@
 import { SelectOption } from '@/types'
 import { useState } from 'react'
-import Select from 'react-select'
+import Select, { MultiValue, ActionMeta } from 'react-select'
 
 interface Props {
   options: SelectOption[]
@@ -11,9 +11,12 @@ const Multiselect = (props: Props): JSX.Element => {
   const { options, onChange: updateValue } = props
   const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>([])
 
-  const onChange = (value: SelectOption[]): void => {
-    setSelectedOptions(value)
-    updateValue(value)
+  const onChange = (
+    value: MultiValue<SelectOption>,
+    actionMeta: ActionMeta<SelectOption>,
+  ): void => {
+    setSelectedOptions(value as SelectOption[])
+    updateValue(value as SelectOption[])
   }
 
   return (

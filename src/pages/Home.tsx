@@ -89,11 +89,11 @@ const Home = (): JSX.Element => {
   )
 
   const updateItemPerPage = (
-    newValue: SingleValue<{ value: number; label: string }>,
+    option: SingleValue<{ value: number; label: string }>,
     actionMeta: ActionMeta<{ value: number; label: string }>,
   ): void => {
     setPageNumber(0)
-    setItemPerPage(option.value)
+    setItemPerPage((option as SelectOption).value)
   }
 
   useEffect(() => {
