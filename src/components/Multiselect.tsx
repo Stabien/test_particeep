@@ -17,7 +17,7 @@ const Multiselect = (props: Props): JSX.Element => {
   }
 
   return (
-    <div className="multiselect-container">
+    <div>
       <Select
         value={selectedOptions}
         options={options}

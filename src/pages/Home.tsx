@@ -47,10 +47,10 @@ const Home = (): JSX.Element => {
 
   return (
     <div className="w-4/5 mx-auto mt-5">
-      <div className="filter">
+      <div>
         <Multiselect options={multiselectOptions} onChange={setSelectedOptions} />
       </div>
-      <div className="container flex flex-wrap flex-row">{renderMovieList}</div>
+      <div className="flex flex-wrap flex-row">{renderMovieList}</div>
     </div>
   )
 }
