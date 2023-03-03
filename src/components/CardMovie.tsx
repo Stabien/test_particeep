@@ -82,13 +82,15 @@ const CardMovie = (props: Props): JSX.Element => {
         <div className="w-24">
           <div className="w-full flex flex-row justify-between text-white">
             <button
-              className={`w-5 h-5 ${isLiked ? 'text-yellow-500' : ''}`}
+              className={`w-5 h-5 transition-all duration-200 ${isLiked ? 'text-yellow-500' : ''}`}
               onClick={() => handleLike()}
             >
               <FontAwesomeIcon icon={faThumbsUp} />
             </button>
             <button
-              className={`w-5 h-5 ${isDisliked ? 'text-yellow-500' : ''}`}
+              className={`w-5 h-5 transition-all duration-200 ${
+                isDisliked ? 'text-yellow-500' : ''
+              }`}
               onClick={() => handleDislike()}
             >
               <FontAwesomeIcon icon={faThumbsDown} />
@@ -96,8 +98,14 @@ const CardMovie = (props: Props): JSX.Element => {
           </div>
           <div>
             <div className="w-full flex flex-row justify-between pt-2 text-white rounded">
-              <span className="bg-yellow-400 h-1" style={{ width: `${likeRatio}%` }}></span>
-              <span className="bg-slate-500 h-1" style={{ width: `${dislikeRatio}%` }}></span>
+              <span
+                className="bg-yellow-400 h-1 transition-all duration-200"
+                style={{ width: `${likeRatio}%` }}
+              ></span>
+              <span
+                className="bg-slate-500 h-1 transition-all duration-200"
+                style={{ width: `${dislikeRatio}%` }}
+              ></span>
             </div>
             <div className="flex flex-row justify-between text-white">
               <span>{props.data.likes}</span>
