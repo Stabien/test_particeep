@@ -69,28 +69,40 @@ const CardMovie = (props: Props): JSX.Element => {
   }, [props.data.likes, props.data.dislikes])
 
   return (
-    <div className="w-96 p-6 mr-4 my-2 ml-0 bg-blue-500 rounded text-white">
+    <div className="w-96 p-6 sm:mr-4 my-2 ml-0 bg-black rounded text-yellow-400 shadow-sm">
       <h1 className="font-bold">{props.data.title}</h1>
-      <h2>{props.data.category}</h2>
+      <h2 className="text-white">{props.data.category}</h2>
       <div className="mt-8 flex flex-row justify-between">
         <button
           onClick={() => dispatch(deleteMovie(props.data.id))}
-          className="bg-red-500 p-1.5 rounded text-sm"
+          className="bg-red-500 p-1.5 rounded text-sm h-10 my-auto text-white"
         >
           Supprimer
         </button>
         <div className="w-24">
-          <div className="w-full flex flex-row justify-between">
-            <button className="w-5 h-5" onClick={() => handleLike()}>
+          <div className="w-full flex flex-row justify-between text-white">
+            <button
+              className={`w-5 h-5 ${isLiked ? 'text-yellow-500' : ''}`}
+              onClick={() => handleLike()}
+            >
               <FontAwesomeIcon icon={faThumbsUp} />
             </button>
-            <button className="w-5 h-5" onClick={() => handleDislike()}>
+            <button
+              className={`w-5 h-5 ${isDisliked ? 'text-yellow-500' : ''}`}
+              onClick={() => handleDislike()}
+            >
               <FontAwesomeIcon icon={faThumbsDown} />
             </button>
           </div>
-          <div className="w-full flex flex-row justify-between pt-2">
-            <span className="bg-yellow-300 h-1" style={{ width: `${likeRatio}%` }}></span>
-            <span className="bg-black h-1" style={{ width: `${dislikeRatio}%` }}></span>
+          <div>
+            <div className="w-full flex flex-row justify-between pt-2 text-white rounded">
+              <span className="bg-yellow-400 h-1" style={{ width: `${likeRatio}%` }}></span>
+              <span className="bg-slate-500 h-1" style={{ width: `${dislikeRatio}%` }}></span>
+            </div>
+            <div className="flex flex-row justify-between text-white">
+              <span>{props.data.likes}</span>
+              <span>{props.data.dislikes}</span>
+            </div>
           </div>
         </div>
       </div>

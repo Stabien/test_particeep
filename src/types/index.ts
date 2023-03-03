@@ -20,7 +20,7 @@ export interface MovieLikeData {
   value: number
 }
 
-export interface MultiselectOption {
+export interface SelectOption {
   label: string
-  value: string
+  value: any
 }
