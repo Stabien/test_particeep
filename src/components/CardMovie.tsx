@@ -7,18 +7,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
-  data: Movie
+  movie: Movie
 }
 
 const CardMovie = (props: Props): JSX.Element => {
-  const [likeRatio, setLikeRatio] = useState(
-    (props.data.likes / (props.data.likes + props.data.dislikes)) * 100,
-  )
+  const { movie } = props
+  const [likeRatio, setLikeRatio] = useState((movie.likes / (movie.likes + movie.dislikes)) * 100)
   const [dislikeRatio, setDislikeRatio] = useState(
-    (props.data.dislikes / (props.data.likes + props.data.dislikes)) * 100,
+    (movie.dislikes / (movie.likes + movie.dislikes)) * 100,
   )
-  const [isLiked, setIsLiked] = useState(props.data.isLiked)
-  const [isDisliked, setIsDisliked] = useState(props.data.isDisliked)
+  const [isLiked, setIsLiked] = useState(movie.isLiked)
+  const [isDisliked, setIsDisliked] = useState(movie.isDisliked)
   const dispatch = useDispatch()
 
   const deleteMovie = (id: string): AnyAction => {
@@ -27,7 +26,7 @@ const CardMovie = (props: Props): JSX.Element => {
 
   const likeMovie = (value: number): AnyAction => {
     return likeMovieAction({
-      id: props.data.id,
+      id: movie.id,
       value,
       removePreviousDislike: isDisliked,
     })
@@ -35,7 +34,7 @@ const CardMovie = (props: Props): JSX.Element => {
 
   const dislikeMovie = (value: number): AnyAction => {
     return dislikeMovieAction({
-      id: props.data.id,
+      id: movie.id,
       value,
       removePreviousLike: isLiked,
     })
@@ -64,17 +63,17 @@ const CardMovie = (props: Props): JSX.Element => {
   }
 
   useEffect(() => {
-    setLikeRatio((props.data.likes / (props.data.likes + props.data.dislikes)) * 100)
-    setDislikeRatio((props.data.dislikes / (props.data.likes + props.data.dislikes)) * 100)
-  }, [props.data.likes, props.data.dislikes])
+    setLikeRatio((movie.likes / (movie.likes + movie.dislikes)) * 100)
+    setDislikeRatio((movie.dislikes / (movie.likes + movie.dislikes)) * 100)
+  }, [movie.likes, movie.dislikes])
 
   return (
     <div className="w-96 p-6 sm:mr-4 my-2 ml-0 bg-black rounded text-yellow-400 shadow-sm">
-      <h1 className="font-bold">{props.data.title}</h1>
-      <h2 className="text-white">{props.data.category}</h2>
+      <h1 className="font-bold">{movie.title}</h1>
+      <h2 className="text-white">{movie.category}</h2>
       <div className="mt-8 flex flex-row justify-between">
         <button
-          onClick={() => dispatch(deleteMovie(props.data.id))}
+          onClick={() => dispatch(deleteMovie(movie.id))}
           className="bg-red-500 p-1.5 rounded text-sm h-10 my-auto text-white"
         >
           Supprimer
@@ -99,17 +98,21 @@ const CardMovie = (props: Props): JSX.Element => {
           <div>
             <div className="w-full flex flex-row justify-between pt-2 text-white rounded">
               <span
-                className="bg-yellow-400 h-1 transition-all duration-200"
+                className={`rounded-l-sm bg-yellow-400 h-1 transition-all duration-200 ${
+                  movie.dislikes === 0 ? 'rounded-r-sm' : ''
+                }`}
                 style={{ width: `${likeRatio}%` }}
               ></span>
               <span
-                className="bg-slate-500 h-1 transition-all duration-200"
+                className={`rounded-r-sm bg-slate-500 h-1 transition-all duration-200 ${
+                  movie.dislikes === 0 ? 'rounded-l-sm' : ''
+                }`}
                 style={{ width: `${dislikeRatio}%` }}
               ></span>
             </div>
             <div className="flex flex-row justify-between text-white">
-              <span>{props.data.likes}</span>
-              <span>{props.data.dislikes}</span>
+              <span>{movie.likes}</span>
+              <span>{movie.dislikes}</span>
             </div>
           </div>
         </div>

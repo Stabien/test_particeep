@@ -58,7 +58,7 @@ const Home = (): JSX.Element => {
 
     for (let i = indexBeginList; i < indexEndList; i++) {
       if (i < movieList.length) {
-        listToRender.push(<CardMovie key={movieList[i].id} data={movieList[i]} />)
+        listToRender.push(<CardMovie key={movieList[i].id} movie={movieList[i]} />)
       }
     }
 
