@@ -10,4 +10,5 @@ export default defineConfig({
     },
   },
   plugins: [react()],
+  base: 'https://stabien.github.io/test_particeep/',
 })
